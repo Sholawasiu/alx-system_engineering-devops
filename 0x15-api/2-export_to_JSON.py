@@ -1,39 +1,30 @@
 #!/usr/bin/python3
-# Author: @tonybnya
 """
 This Python script uses 0-gather_data_from_an_API.py file,
 and export data in the JSON format.
 """
 import json
 import requests
+import sys
 
 
 if __name__ == "__main__":
     URL = 'https://jsonplaceholder.typicode.com/'
+    id_ = sys.argv[1]
+    user_url = URL + 'users/' + id_
+    tasks_url = URL + 'todos'
 
-    users_url = URL + 'users'
-    todos_url = URL + 'todos'
+    user = requests.get(user_url).json()
+    name = user.get('username')
+    tasks = requests.get(tasks_url, params={"userId": id_}).json()
 
-    users = requests.get(users_url).json()
-    all_todos = requests.get(todos_url).json()
+    obj = {id_: []}
 
-    obj = {}
+    for task in tasks:
+        status = task.get("completed")
+        title = task.get("title")
 
-    for user in users:
-        id_ = user.get("id")
-        name = user.get("username")
-        todos = list(filter(lambda x: x.get("userId") == id_, all_todos))
+        obj[id_].append({"task": title, "completed": status, "username": name})
 
-        data = list(map(
-            lambda x: {
-                "username": name,
-                "task": x.get("title"),
-                "completed": x.get("completed")
-            },
-            todos
-        ))
-
-        obj["{}".format(id_)] = data
-
-    with open("todo_all_employees.json", "w") as file:
+    with open("{}.json".format(id_), "w") as file:
         json.dump(obj, file)
