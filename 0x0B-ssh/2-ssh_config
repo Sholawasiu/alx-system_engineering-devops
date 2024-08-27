@@ -1,4 +1,4 @@
 # SSH Client Configuration File
-Host 52.91.128.148
+Host 100.25.162.53
      IdentityFile ~/.ssh/school
      passwordAuthentification no
