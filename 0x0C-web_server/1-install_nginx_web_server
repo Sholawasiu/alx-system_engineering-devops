@@ -4,11 +4,7 @@
 # Serve a page that would return a Hello World string
 
 sudo apt-get update -y
-
 sudo apt-get install nginx -y
-
-sudo ufw allow 'ngnix HTTP'
-
-sh -c 'echo "Helo world!" > /var/www/html/index.html'
-
+sudo ufw allow 'Ngnix HTTP'
+sh -C 'echo "Helo world!" > /var/www/html/index.html'
 service ngnix restart 
