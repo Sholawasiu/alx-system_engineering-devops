@@ -14,6 +14,6 @@ frontend thepenchantit
 backend app
     balance roundrobin
     server 134922-web-01 100.25.162.53:80 check
-    server 134922-web-02 54.237.35.12:80 check" >> /etc/haproxy/haproxy.cfg
+    server 134922-web-02 54.237.35.12:80 check" >> /etc/haproxy.cfg
 
 sudo service haproxy restart
