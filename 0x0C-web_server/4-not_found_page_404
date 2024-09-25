@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-# Configures a new ubuntu machine by installing
-# Nginx where it should be listening on port 80
-# Serve a page that would return a Hello World string
+# servers are the piece of software generating and serving HTML pages
+# installing nginx on the web-01
 
 apt-get update -y
 apt-get install nginx -y
@@ -9,7 +8,6 @@ sudo ufw allow 'Nginx HTTP'
 sh -c 'echo "Hello World!" > /var/www/html/index.html'
 sudo touch /var/www/html/404.html
 echo "Ceci n'est pas une page" > /var/www/html/404.html
-sed -i '/listen 80 default_server/a rewrite ^/redirect_me https://www.youtube.com/@
-thepenchantit permanent;' /etc/nginx/sites-available/default
-sed -i '/listen 80 default_server/a error_page 404.html;' /etc/nginx/sites-available/default
-sudo service nginx restart
+sed -i '/listen 80 default_server/a rewrite ^/redirect_me https://www.youtube.com/@cryptotechcoder permanent;' /etc/nginx/sites-available/default
+sed -i '/listen 80 default_server/a error_page 404 /404.html;' /etc/nginx/sites-available/default
+service nginx restart
