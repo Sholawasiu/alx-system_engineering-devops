@@ -3,7 +3,7 @@
 # Nginx where it should be listening on port 80
 # Serve a page that would return a Hello World string
 
-apt-get update -y
+apt-get update
 apt-get install nginx -y
 
 mkdir /etc/nginx/html
