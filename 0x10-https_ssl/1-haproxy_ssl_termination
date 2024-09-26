@@ -10,6 +10,7 @@ global
 
         #dhparam
         tune.ssl.default-dh-param 2048
+
         # Default SSL material locations
         ca-base /etc/ssl/certs
         crt-base /etc/ssl/private
@@ -35,11 +36,11 @@ defaults
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
 
-frontend cryptotechcoder
-    bind *:80
-    bind *:443 ssl crt /etc/letsencrypt/live/www.thepenchantit.tech/thepenchantit.pem
-    mode http
-    default_backend app
+frontend thepenchantit
+        bind *:80
+        bind *:443 ssl crt /etc/letsencrypt/live/www.thepenchantit.tech/thepenchantit.pem
+        mode http
+        default_backend app
 
 backend app
     balance roundrobin
